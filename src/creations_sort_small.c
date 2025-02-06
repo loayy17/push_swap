@@ -19,8 +19,8 @@ t_node	*create_node(char *data)
 
 	valid = 1;
 	node = malloc(sizeof(t_node));
-	if (!node)
-		return (NULL);
+	if (!node || !data)
+		return (0);
 	node->data = ft_atol_handle(data, &valid);
 	node->next = NULL;
 	node->prev = NULL;
@@ -85,7 +85,7 @@ int	*create_sorted_array(t_node *stack)
 void	sort_two(t_node **stack)
 {
 	if (!*stack || !(*stack)->next)
-		return ;
+		return;
 	if ((*stack)->data > (*stack)->next->data)
 		swap(stack, 'a', 0);
 }

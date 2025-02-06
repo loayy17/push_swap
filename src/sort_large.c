@@ -6,7 +6,7 @@
 /*   By: lalhindi <lalhindi@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 21:00:00 by yourname          #+#    #+#             */
-/*   Updated: 2025/02/06 19:17:51 by lalhindi         ###   ########.fr       */
+/*   Updated: 2025/02/06 21:17:19 by lalhindi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static int	dynamic_chunk_count(int size)
 	else if (size <= 500)
 		base = 5;
 	else
-		base = 22;
+		base = 22;	
 	return (base + (lcm(size, base) % 3));
 }
 

@@ -6,7 +6,7 @@
 /*   By: lalhindi <lalhindi@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 21:00:00 by yourname          #+#    #+#             */
-/*   Updated: 2025/02/06 17:56:08 by lalhindi         ###   ########.fr       */
+/*   Updated: 2025/02/06 23:27:52 by lalhindi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,16 +48,16 @@ void	free_stack(t_node **stack)
 
 	while (*stack)
 	{
-		tmp = (*stack)->next;
-		free(*stack);
-		*stack = tmp;
+		tmp = (*stack);
+		*stack = (*stack)->next;
+		free(tmp);
 	}
 }
 
 void	free_resource(t_node **stack_a, t_node **stack_b)
 {
-	if (stack_a)
+	if (stack_a && *stack_a)
 		free_stack(stack_a);
-	if (stack_b)
+	if (stack_b && *stack_b)
 		free_stack(stack_b);
 }

@@ -31,22 +31,19 @@ int	main(int argc, char **argv)
 	t_node	*stack_b;
 
 	if (argc < 2)
-	{
-		// ft_dprintf(2, "Error\n");
 		return (1);
-	}
 	if (!validate_input(argv + 1))
 	{
 		ft_dprintf(2, "Error\n");
 		return (1);
 	}
+	stack_b = NULL;
 	stack_a = create_stack(argv + 1);
-	if (!stack_a)
+	if (!stack_a || get_stack_size(stack_a) != argc - 1)
 	{
-		ft_dprintf(2, "Error\n");
+		free_resource(&stack_a, &stack_b);
 		return (1);
 	}
-	stack_b = NULL;
 	if (!is_sorted(stack_a))
 		sort_stack(&stack_a, &stack_b);
 	free_resource(&stack_a, &stack_b);
