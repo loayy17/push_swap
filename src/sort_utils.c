@@ -1,7 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_utils.c                                       :+:      :+:    :+:   */
+/*   sort_utils.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yourname <email@domain.com>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/04 21:00:00 by yourname          #+#    #+#             */
+/*   Updated: 2025/02/04 21:30:00 by yourname         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,3 +80,27 @@ int	ft_abs(int num)
 		return (-num);
 	return (num);
 }
+
+int	ft_sqrt(int num)
+{
+	int	root;
+
+	root = 1;
+	while (root * root <= num)
+		root++;
+	return (root - 1);
+}
+int ft_min(int a, int b)
+{
+	if (a < b)
+		return (a);
+	return (b);
+}
+int ft_max(int a, int b)
+{
+	if (a > b)
+		return (a);
+	return (b);
+}
+
+

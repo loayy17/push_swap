@@ -8,11 +8,11 @@
             "args": [
                 "-fdiagnostics-color=always",
                 "-g",
-                "${workspaceFolder}/src/push_swap.c",
+                "${workspaceFolder}/src/*.c",
                 "-o",
-                "${workspaceFolder}/src/push_swap", // Change this line
-                "-I${workspaceFolder}/includes",
-                "-I${workspaceFolder}/libraries/Libft/",
+                "${workspaceFolder}/push_swap",
+                "-I${workspaceFolder}/include",
+                "-I${workspaceFolder}/libraries/Libft",
                 "${workspaceFolder}/libraries/Libft/libft.a"
             ],
             "options": {

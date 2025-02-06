@@ -1,21 +1,28 @@
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -Iincludes -I$(LIBFTDIR)
+CFLAGS = -Wall -Wextra -Werror -Iinclude -I$(LIBFTDIR) -g
 AR = ar -rcs
 RM = rm -f
 NAME = push_swap
 NAME_BONUS = checker
 LIBFTDIR = libraries/Libft
 LIBFT = $(LIBFTDIR)/libft.a
-SRC = src/main.c \
-	  src/swap_operations.c \
-	  src/free_resource.c \
-	  src/creations.c \
-	  src/ft_validation.c \
-	  src/both_operations.c \
+SRC = src/creations_sort_small.c \
+	  src/both_free.c \
+	  src/main.c \
 	  src/sort_large.c \
-	  src/utils.c
+	  src/sort_utils.c \
+	  src/stack_utils.c \
+	  src/swap_operations.c \
+	  src/validations.c
 
-SRC_BONUS = src_bonus/checker.c
+SRC_BONUS = src_bonus/checker.c \
+			src/creations_sort_small.c \
+			src/both_free.c \
+			src/sort_large.c \
+			src/sort_utils.c \
+			src/stack_utils.c \
+			src/swap_operations.c \
+			src/validations.c
 INC = -Iincludes -I$(LIBFTDIR)
 
 OBJ = $(SRC:.c=.o)
@@ -29,7 +36,7 @@ $(LIBFT) :
 $(NAME): $(OBJ)
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(INC) $(LIBFT)
 
-bonus: $(LIBFT) $(NAME_BONUS)
+bonus: $(LIBFT) $(NAME) $(NAME_BONUS)
 
 $(NAME_BONUS): $(OBJ_BONUS)
 	$(CC) $(CFLAGS) -o $(NAME_BONUS) $(OBJ_BONUS) $(LIBFT) $(INC)

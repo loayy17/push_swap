@@ -1,98 +1,87 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   swap_operations.c                                  :+:      :+:    :+:   */
+/*   swap_operations.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lalhindi <lalhindi@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: yourname <email@domain.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/03 02:39:10 by lalhindi          #+#    #+#             */
-/*   Updated: 2025/02/04 21:39:48 by lalhindi         ###   ########.fr       */
+/*   Created: 2025/02/04 21:00:00 by yourname          #+#    #+#             */
+/*   Updated: 2025/02/04 21:30:00 by yourname         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	swap(t_node **stack, char a,int both)
-{
-	t_node	*first_node;
-	t_node	*second_node;
-
-	if (!stack || !*stack || !(*stack)->next || !(*stack)->next->next)
-		return ;
-	first_node = *stack;
-	second_node = first_node->next;
-	first_node->next = second_node->next;
-	first_node->prev = second_node;
-	second_node->next = first_node;
-	second_node->prev = NULL;
-	*stack = second_node;
-	if (a == 'a' && !both)
-		ft_printf("sa\n");
-	else if(a == 'b' && !both)
-		ft_printf("sb\n");
-}
-
-void	push_stack(t_node **src, t_node **dest, char c)
+void	swap(t_node **s, char c, int both)
 {
 	t_node	*tmp;
 
-	if (!src || !*src)
+	if (!*s || !(*s)->next)
+		return ;
+	tmp = *s;
+	*s = (*s)->next;
+	tmp->next = (*s)->next;
+	(*s)->next = tmp;
+	(*s)->prev = NULL;
+	tmp->prev = *s;
+	if (tmp->next)
+		tmp->next->prev = tmp;
+	if (!both)
+		ft_printf("s%c\n", c);
+}
+
+void	push_stack(t_node **src, t_node **dst, char c,int not_print)
+{
+	t_node	*tmp;
+
+	if (!*src)
 		return ;
 	tmp = *src;
-	*src = tmp->next;
+	*src = (*src)->next;
 	if (*src)
 		(*src)->prev = NULL;
-	tmp->next = *dest;
-	if (*dest)
-		(*dest)->prev = tmp;
-	*dest = tmp;
-	tmp->prev = NULL;
-	if (c == 'a')
-		ft_printf("pa\n");
-	else
-		ft_printf("pb\n");
+	tmp->next = *dst;
+	if (*dst)
+		(*dst)->prev = tmp;
+	*dst = tmp;
+	if(!not_print)
+		ft_printf("p%c\n", c);
 }
 
-void	rotate(t_node **stack, char c,int both)
+void	rotate(t_node **s, char c, int both)
 {
+	t_node	*last;
 	t_node	*tmp;
-	t_node	*last_node;
 
-	if (!stack || !*stack || !(*stack)->next)
+	if (!*s || !(*s)->next)
 		return ;
-	tmp = *stack;
-	last_node = tmp;
-	while (last_node->next)
-		last_node = last_node->next;
-	*stack = tmp->next;
-	(*stack)->prev = NULL;
+	tmp = *s;
+	last = *s;
+	while (last->next)
+		last = last->next;
+	*s = (*s)->next;
+	(*s)->prev = NULL;
 	tmp->next = NULL;
-	tmp->prev = last_node;
-	last_node->next = tmp;
-	if (c == 'a' && !both)
-		ft_printf("ra\n");
-	else if (c == 'b' && !both)
-		ft_printf("rb\n");
+	tmp->prev = last;
+	last->next = tmp;
+	if (!both)
+		ft_printf("r%c\n", c);
 }
 
-void	reverse_rotate(t_node **stack, char c,int both)
+void	reverse_rotate(t_node **s, char c, int both)
 {
-	t_node	*tmp;
-	t_node	*last_node;
+	t_node	*last;
 
-	if (!stack || !*stack || !(*stack)->next)
+	if (!*s || !(*s)->next)
 		return ;
-	tmp = *stack;
-	last_node = tmp;
-	while (last_node->next)
-		last_node = last_node->next;
-	last_node->prev->next = NULL;
-	last_node->next = tmp;
-	tmp->prev = last_node;
-	last_node->prev = NULL;
-	*stack = last_node;
-	if (c == 'a' && !both)
-		ft_printf("rra\n");
-	else if(c == 'b' && !both)
-		ft_printf("rrb\n");
+	last = *s;
+	while (last->next)
+		last = last->next;
+	last->prev->next = NULL;
+	last->prev = NULL;
+	last->next = *s;
+	(*s)->prev = last;
+	*s = last;
+	if (!both)
+		ft_printf("rr%c\n", c);
 }

@@ -1,27 +1,46 @@
 import random
 import subprocess
- 
+
 inst_arr = []
 failed_cases = []
-def simulate_push_swap_output(arr):
-    # Simulate the output of push_swap
-    return '\n'.join(['operation'] * random.randint(1, 1000))
 
-for x in range(1000):
-    arr = random.sample(range(-1000, 100000), 500)
-    str_list = ''.join(str(e) + ' ' for e in arr)
-    simulated_output = simulate_push_swap_output(arr)
-    if len(simulated_output.split('\n')) - 1 > 800:
-        print("FAIL")
+for x in range(10000):
+    number = 100  # Number of random numbers to generate
+    limit = 699  # Instruction limit
+    # Generate a unique list of 500 random numbers
+    arr = random.sample(range(-10000000, 100000000), number)
+    str_list = ' '.join(map(str, arr))
+
+    # Run push_swap and capture its output
+    proc2 = subprocess.run(f"./push_swap {str_list} | wc -l", shell=True, capture_output=True, text=True)
+    proc = subprocess.run(f"./push_swap {str_list} | ./checker {str_list}", shell=True, capture_output=True, text=True)
+    num_instructions = int(proc2.stdout.strip())
+    # Check if sorting failed or exceeded the instruction limit
+    print(f"Test {x}: {proc2.stdout} instructions")
+    if "KO" in proc.stdout:
+        print(f"❌ FAIL - Test {x}: {num_instructions} instructions")
         failed_cases.append(str_list)
-    inst_arr.append(len(simulated_output.split('\n')) - 1)
-    print("TEST", x, ":", len(simulated_output.split('\n')) - 1)
-if len(failed_cases) == 0:
-    print("ALL TESTS PASSED")
-else :
-    print("FAILED CASES:")
-for case in failed_cases:
-    print(case)
-print("AVERAGE:", sum(inst_arr) / len(inst_arr))
-print("MAX:", max(inst_arr))
-print("MIN:", min(inst_arr))
+    elif num_instructions > limit:
+        print(f"❌ NOT LIMIT - Test {x}: {num_instructions} instructions")
+        failed_cases.append(str_list)
+    elif "ُError" in proc.stdout:
+        print(f"❌ Error ")
+    elif "OK" in proc.stdout:
+        print(f"✅ PASS - Test {x}: {num_instructions} instructions")
+    else:
+        print(f"❌ FAIL - Test {x}: {num_instructions} instructions")
+        failed_cases.append(str_list)
+    inst_arr.append(num_instructions)
+
+# Print summary
+if not failed_cases:
+    print("\n🎉 ALL TESTS PASSED!")
+else:
+    print("\n❌ FAILED CASES:")
+    for case in failed_cases:
+        print(case)
+
+print("\n📊 Statistics:")
+print(f"AVERAGE: {sum(inst_arr) / len(inst_arr):.2f}")
+print(f"MAX: {max(inst_arr)}")
+print(f"MIN: {min(inst_arr)}")
