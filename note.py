@@ -4,9 +4,9 @@ import subprocess
 inst_arr = []
 failed_cases = []
 
-for x in range(2000):
-    number = 100 
-    limit = 699
+for x in range(200000):
+    number = 5 
+    limit = 12
     arr = random.sample(range(-10000000, 100000000), number)
     str_list = ' '.join(map(str, arr))
 

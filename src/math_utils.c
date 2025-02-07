@@ -6,7 +6,7 @@
 /*   By: lalhindi <lalhindi@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 00:01:02 by lalhindi          #+#    #+#             */
-/*   Updated: 2025/02/07 00:03:05 by lalhindi         ###   ########.fr       */
+/*   Updated: 2025/02/07 23:55:11 by lalhindi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ int	get_max(t_node *stack)
 int	dynamic_chunk_count(int size)
 {
 	int	base;
+	int	lcm_div;
 
 	if (size <= 10)
 		return (1);
@@ -76,5 +77,6 @@ int	dynamic_chunk_count(int size)
 		base = 5;
 	else
 		base = 22;
-	return (base + (lcm(size, base) % 3));
+	lcm_div = lcm(size, base) % 3;
+	return (base + lcm_div);
 }

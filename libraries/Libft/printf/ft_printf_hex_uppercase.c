@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_hex_uppercase.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oissa <oissa@student.42amman.com>          +#+  +:+       +#+        */
+/*   By: lalhindi <lalhindi@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/13 23:24:53 by oissa             #+#    #+#             */
-/*   Updated: 2024/10/24 16:26:58 by oissa            ###   ########.fr       */
+/*   Created: 2025/02/08 00:26:32 by lalhindi          #+#    #+#             */
+/*   Updated: 2025/02/08 00:26:32 by lalhindi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
