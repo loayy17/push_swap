@@ -30,7 +30,7 @@ void	swap(t_node **s, char c, int both)
 		ft_printf("s%c\n", c);
 }
 
-void	push_stack(t_node **src, t_node **dst, char c,int not_print)
+void	push_stack(t_node **src, t_node **dst, char c, int not_print)
 {
 	t_node	*tmp;
 
@@ -44,7 +44,7 @@ void	push_stack(t_node **src, t_node **dst, char c,int not_print)
 	if (*dst)
 		(*dst)->prev = tmp;
 	*dst = tmp;
-	if(!not_print)
+	if (!not_print)
 		ft_printf("p%c\n", c);
 }
 

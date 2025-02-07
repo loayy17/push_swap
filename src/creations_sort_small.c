@@ -85,7 +85,7 @@ int	*create_sorted_array(t_node *stack)
 void	sort_two(t_node **stack)
 {
 	if (!*stack || !(*stack)->next)
-		return;
+		return ;
 	if ((*stack)->data > (*stack)->next->data)
 		swap(stack, 'a', 0);
 }

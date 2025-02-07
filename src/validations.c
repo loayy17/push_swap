@@ -12,6 +12,13 @@
 
 #include "push_swap.h"
 
+int	ft_abs(int num)
+{
+	if (num < 0)
+		return (-num);
+	return (num);
+}
+
 int	is_valid_number(char *str)
 {
 	int	i;
@@ -32,20 +39,21 @@ int	check_duplicates(char **str)
 {
 	int		i;
 	int		j;
-	int valid;
-	long number;
-	long number_new;
+	int		valid;
+	long	number;
+	long	number_new;
+
 	i = -1;
 	while (str[++i])
 	{
 		j = i;
 		number = ft_atol_handle(str[i], &valid);
-		if(!valid)
+		if (!valid)
 			return (1);
 		while (str[++j])
 		{
 			number_new = ft_atol_handle(str[j], &valid);
-			if(!valid)
+			if (!valid)
 				return (1);
 			if (number == number_new)
 				return (1);
@@ -53,6 +61,7 @@ int	check_duplicates(char **str)
 	}
 	return (0);
 }
+
 int	is_sorted(t_node *stack)
 {
 	while (stack && stack->next)

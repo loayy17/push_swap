@@ -12,21 +12,21 @@
 
 #include "push_swap.h"
 
-void	swap_both(t_node **stack_a, t_node **stack_b,int both)
+void	swap_both(t_node **stack_a, t_node **stack_b, int both)
 {
 	swap(stack_a, 'a', !both);
 	swap(stack_b, 'b', !both);
-	if(!both)
+	if (!both)
 		ft_printf("ss\n");
 }
 
-void	rotate_both(t_node **a, t_node **b,int both)
+void	rotate_both(t_node **a, t_node **b, int both)
 {
 	if (*a && (*a)->next && *b && (*b)->next)
 	{
 		rotate(a, 'a', !both);
 		rotate(b, 'b', !both);
-		if(!both)
+		if (!both)
 			ft_printf("rr\n");
 	}
 }
@@ -37,7 +37,7 @@ void	reverse_rotate_both(t_node **a, t_node **b, int both)
 	{
 		reverse_rotate(a, 'a', 1);
 		reverse_rotate(b, 'b', 1);
-		if(!both)
+		if (!both)
 			ft_printf("rrr\n");
 	}
 }

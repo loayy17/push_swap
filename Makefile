@@ -1,45 +1,51 @@
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -Iinclude -I$(LIBFTDIR) -g
+CFLAGS = -Wall -Wextra -Werror $(INC)
 AR = ar -rcs
 RM = rm -f
 NAME = push_swap
 NAME_BONUS = checker
 LIBFTDIR = libraries/Libft
 LIBFT = $(LIBFTDIR)/libft.a
-SRC = src/creations_sort_small.c \
-	  src/both_free.c \
-	  src/main.c \
-	  src/sort_large.c \
-	  src/sort_utils.c \
-	  src/stack_utils.c \
-	  src/swap_operations.c \
-	  src/validations.c
+INC = -Iinclude -I$(LIBFTDIR)
+
+SRC =   src/both_free.c \
+		src/creations_sort_small.c \
+		src/main.c \
+		src/math_utils.c \
+		src/sort_large.c \
+		src/sort_large_utils.c \
+		src/sort_utils.c \
+		src/stack_utils.c \
+		src/swap_operations.c \
+		src/validations.c
 
 SRC_BONUS = src_bonus/checker.c \
-			src/creations_sort_small.c \
 			src/both_free.c \
+			src/creations_sort_small.c \
+			src/math_utils.c \
 			src/sort_large.c \
+			src/sort_large_utils.c \
 			src/sort_utils.c \
 			src/stack_utils.c \
 			src/swap_operations.c \
 			src/validations.c
-INC = -Iincludes -I$(LIBFTDIR)
+
 
 OBJ = $(SRC:.c=.o)
 OBJ_BONUS = $(SRC_BONUS:.c=.o)
 
-all: $(LIBFT) $(NAME)
+$(NAME): $(LIBFT) $(OBJ)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(INC) $(LIBFT)
+
+all: $(NAME) $(NAME_BONUS)
 
 $(LIBFT) :
 	$(MAKE) -C $(LIBFTDIR)
 
-$(NAME): $(OBJ)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(INC) $(LIBFT)
-
-bonus: $(LIBFT) $(NAME) $(NAME_BONUS)
-
-$(NAME_BONUS): $(OBJ_BONUS)
+$(NAME_BONUS): $(LIBFT) $(OBJ_BONUS)
 	$(CC) $(CFLAGS) -o $(NAME_BONUS) $(OBJ_BONUS) $(LIBFT) $(INC)
+
+bonus: $(NAME_BONUS)
 
 clean:
 	$(RM) $(OBJ) $(OBJ_BONUS)
